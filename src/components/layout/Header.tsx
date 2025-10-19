@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-warm-off-white shadow-md sticky top-0 z-50">
+    <header className="bg-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" onClick={() => setIsMenuOpen(false)}>
           <img src={PremGLogo} alt="PremG Logo" className="h-12" />

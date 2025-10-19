@@ -1,15 +1,15 @@
 import React from 'react';
-import heroImage from '../assets/hero-spices.jpg'; // <-- IMPORT YOUR IMAGE HERE
+import heroImage from '../assets/hero-spices.jpg'; 
 
 const HeroSection: React.FC = () => {
   const heroStyle: React.CSSProperties = {
-    backgroundImage: `url(${heroImage})`, // <-- USE THE IMPORTED IMAGE HERE
+    backgroundImage: `url(${heroImage})`,
   };
 
   return (
     <section 
       className="relative bg-cover bg-center h-[60vh] flex items-center justify-center text-center" 
-      style={heroStyle} // Apply the background style
+      style={heroStyle}
     >
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
@@ -21,15 +21,16 @@ const HeroSection: React.FC = () => {
           The Perfect Partner for Your Business.
         </p>
 
-        <div className="mt-8 space-x-4">
-  {/* CHANGE THIS BUTTON */}
-  <button className="bg-transparent border-2 border-white  text-white font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition-colors duration-300 shadow-lg">
-    View Our Products
-  </button>
-  
-  {/* THIS BUTTON IS STYLED CORRECTLY AS A SECONDARY ACTION */}
-  <button className="bg-transparent border-2 border-white text-white font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 hover:text-charcoal-text transition-colors duration-300">
-    Send an Inquiry
+        {/* 👇 THIS IS THE DIV TO CHANGE 👇 */}
+        <div className="mt-8 flex flex-col items-center space-y-4 md:flex-row md:space-y-0 md:space-x-4">
+          
+          {/* 👇 THESE ARE THE BUTTONS TO CHANGE 👇 */}
+          <button className="w-full max-w-xs md:w-auto bg-premg-yellow text-charcoal-text font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition-colors duration-300 shadow-lg">
+            View Our Products
+          </button>
+          
+          <button className="w-full max-w-xs md:w-auto bg-transparent border-2 border-white text-white font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-charcoal-text transition-colors duration-300">
+            Send an Inquiry
           </button>
         </div>
       </div>
