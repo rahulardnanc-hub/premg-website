@@ -47,23 +47,25 @@ const WhyPartnerSection: React.FC = () => {
   return (
     <section className="bg-white py-20">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-poppins font-bold text-charcoal-text">
             The Mark of Quality and Trust
           </h2>
           <p className="text-lg font-lato text-gray-600 mt-2">
-            Why leading retailers & distributors partner with PremG.
+            Why leading retailers & distributors partner with PremG
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature) => (
-            // This is the new card container
-            <div key={feature.title} className="bg-warm-off-white p-8 text-center rounded-xl shadow-lg border border-gray-200">
-              {/* This div creates the colored circle */}
-              <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center ${feature.color}`}>
+          {features.map((feature, index) => (
+            <div
+              key={feature.title}
+              className="bg-warm-off-white p-8 text-center rounded-xl shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl hover:border-heritage-green hover:-translate-y-2 group animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center ${feature.color} transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}>
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-poppins font-semibold text-charcoal-text mt-6 mb-2">
+              <h3 className="text-xl font-poppins font-semibold text-charcoal-text mt-6 mb-2 group-hover:text-heritage-green transition-colors duration-200">
                 {feature.title}
               </h3>
               <p className="font-lato text-gray-600">

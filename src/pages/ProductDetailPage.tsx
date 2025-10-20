@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
+import { ProductDetailSkeleton } from '../components/LoadingSkeleton';
 import type { Product } from '../types/product';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -48,7 +50,7 @@ const ProductDetailPage: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center py-20">Loading Product Details...</div>;
+    return <ProductDetailSkeleton />;
   }
 
   if (!product) {
@@ -67,14 +69,24 @@ const ProductDetailPage: React.FC = () => {
     : 'https://via.placeholder.com/600x400.png?text=No+Image';
 
   return (
-    <div className="bg-warm-off-white min-h-screen">
+    <div className="bg-warm-off-white min-h-screen animate-fade-in">
       <div className="container mx-auto px-6 py-12">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-6 flex items-center gap-2 text-heritage-green hover:text-green-700 transition-colors font-lato"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back
+        </button>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="flex items-center justify-center">
             <img
               src={imageUrl}
               alt={product.name}
-              className="w-full max-w-lg rounded-lg shadow-lg object-cover"
+              className="w-full max-w-lg rounded-lg shadow-lg object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
 
@@ -104,7 +116,7 @@ const ProductDetailPage: React.FC = () => {
                 </h2>
                 <div className="space-y-3">
                   {product.packagingInfo.map((pkg, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg shadow border border-gray-200">
+                    <div key={index} className="bg-white p-4 rounded-lg shadow border border-gray-200 transition-all duration-200 hover:shadow-md hover:border-heritage-green">
                       <div className="flex justify-between items-center">
                         <div>
                           <p className="font-poppins font-semibold text-charcoal-text">
@@ -126,16 +138,19 @@ const ProductDetailPage: React.FC = () => {
                 href="#inquiry-form"
                 onClick={(e) => {
                   e.preventDefault();
-                  document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' });
+                  navigate('/');
+                  setTimeout(() => {
+                    document.getElementById('inquiry-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
                 }}
-                className="bg-premg-yellow text-charcoal-text font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition-colors text-center shadow-lg"
+                className="bg-premg-yellow text-charcoal-text font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-yellow-500 transition-all duration-300 text-center shadow-lg transform hover:scale-105"
               >
                 Request Bulk Quote
               </a>
 
               <Link
                 to={`/products/${product.category.toLowerCase()}`}
-                className="bg-white border-2 border-heritage-green text-heritage-green font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-heritage-green hover:text-white transition-colors text-center"
+                className="bg-white border-2 border-heritage-green text-heritage-green font-poppins font-semibold py-3 px-8 rounded-lg hover:bg-heritage-green hover:text-white transition-all duration-300 text-center transform hover:scale-105"
               >
                 View More {product.category}
               </Link>
